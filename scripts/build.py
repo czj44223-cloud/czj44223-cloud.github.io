@@ -144,12 +144,19 @@ def build():
 [GitHub 个人主页](https://github.com/czj44223-cloud)
 '''
     contacts=[]
-    for key,label in [('email','Gmail'),('youtube','YouTube')]:
-        value=CFG.get('contacts',{}).get(key)
-        if value:
-            url='mailto:'+value if key=='email' else value
-            if not safe_url(url): raise ValueError('Invalid contact URL')
-            contacts.append(f'<li><a href="{e(url)}">{e(label)}'+(f'：{e(value)}' if key=='email' else ' 频道')+'</a></li>')
+    contact_config=CFG.get('contacts',{})
+    emails=contact_config.get('emails',[])
+    if contact_config.get('email'):
+        emails=[contact_config['email']]+emails
+    for email in emails:
+        if not re.fullmatch(r'[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+',email):
+            raise ValueError('Invalid public email')
+        contacts.append(f'<li><a href="mailto:{e(email)}">{e(email)}</a></li>')
+    youtube=contact_config.get('youtube')
+    if youtube:
+        if not youtube.startswith('https://www.youtube.com/'):
+            raise ValueError('Invalid YouTube URL')
+        contacts.append(f'<li><a href="{e(youtube)}">YouTube：{e(urlparse(youtube).path.lstrip("/"))}</a></li>')
     page('/about/','关于','关于 litterburger 的开发笔记与站点维护。','<article class="prose">'+markdown(about)+('<ul class="contact-list">'+''.join(contacts)+'</ul>' if contacts else '')+'</article>','about')
     page('/404/','页面未找到','这个地址暂时没有内容。','<div class="page-intro"><div class="eyebrow">404 / NOT FOUND</div><h1>这一页还没有写下。</h1><p>也许链接已经变更，先回到笔记首页看看。</p><a class="button" href="/">返回首页</a></div>')
     shutil.copyfile(OUT/'404/index.html',OUT/'404.html')

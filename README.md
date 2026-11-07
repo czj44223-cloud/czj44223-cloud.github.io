@@ -48,7 +48,7 @@ git push origin main
 
 ## 可选公开联系方式
 
-`site.json` 中 `contacts` 默认为空。仅在本人确认准确内容并同意公开后添加 `email` 或 `youtube` 字段，再重新构建。邮箱会以明文显示且可能被抓取；不放占位邮箱或推测频道。
+`site.json` 中 `contacts.emails` 为公开邮箱列表，`contacts.youtube` 为公开频道链接。仅在本人确认准确内容并同意公开后修改，再重新构建。邮箱会以明文显示且可能被抓取；不放占位邮箱或推测频道。
 
 ## 发布和回退
 
