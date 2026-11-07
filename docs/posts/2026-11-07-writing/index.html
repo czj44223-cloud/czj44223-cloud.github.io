@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>给未来的自己：怎样更新这份博客 · litterburger 的开发笔记</title><meta name="description" content="用 Markdown 写作，在 GitHub 上保留每一次修改。"><meta name="color-scheme" content="light"><link rel="canonical" href="https://czj44223-cloud.github.io/posts/2026-11-07-writing/"><link rel="stylesheet" href="/assets/style.css"><link rel="icon" href="/favicon.svg" type="image/svg+xml"></head><body><a class="skip" href="#main">跳至正文</a><header><a class="brand" href="/">litterburger<small>开发笔记</small></a><nav aria-label="主导航"><a href="/">首页</a><a href="/posts/" aria-current="page">文章</a><a href="/projects/">项目</a><a href="/about/">关于</a></nav></header><main id="main"><article class="prose"><div class="article-head"><a href="/posts/">← 所有文章</a><h1>给未来的自己：怎样更新这份博客</h1><p class="summary">用 Markdown 写作，在 GitHub 上保留每一次修改。</p><div class="meta"><time datetime="2026-11-07">2026-11-07</time> · litterburger</div></div><p>博客正文保存在仓库的 <code>content/posts/</code> 目录，每篇文章是一份 Markdown 文件。</p>
+<h2>一次简单的发布</h2>
+<ol>
+<li>参考已有文章，新建 <code>YYYY-MM-DD-slug.md</code> 文件。</li>
+<li>在文件开头填写 <code>title</code>、<code>date</code> 和 <code>summary</code>。</li>
+<li>在本地运行构建与检查，再把源码和生成的 <code>docs/</code> 一起提交到 main 分支。</li>
+</ol>
+<pre><code>python3 scripts/build.py
+python3 scripts/check.py
+git add content docs
+git commit -m &quot;Add a new note&quot;
+git push origin main</code></pre>
+<p>GitHub Pages 会从 <code>main</code> 分支的 <code>docs/</code> 目录发布，无需额外的付费服务或部署密钥。</p>
+<h2>写作约定</h2>
+<ul>
+<li>记录已经确认的事实，将计划与结果分开。</li>
+<li>不把密钥、私人配置或未经许可的信息写进文章。</li>
+<li>项目软件的许可与博客站点代码许可分别管理。</li>
+</ul>
+<p>当前轻量渲染器支持标题、段落、列表、链接、行内代码和代码块；原始 HTML 会转义显示。完整维护说明见<a href="https://github.com/czj44223-cloud/czj44223-cloud.github.io">源码仓库</a>。</p></article></main><footer><span>© 2026 litterburger · 慢慢构建，认真记录。</span><span><a href="https://github.com/czj44223-cloud">GitHub</a> · <a href="/about/">关于这个空间</a></span></footer></body></html>
